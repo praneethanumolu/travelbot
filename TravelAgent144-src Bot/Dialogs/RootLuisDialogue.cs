@@ -75,6 +75,7 @@ namespace LuisBot.Dialogs
 
         [LuisIntent("")]
         [LuisIntent("None")]
+
         public async Task None(IDialogContext context, LuisResult result)
         {
             string message = $"Sorry, I did not understand '{result.Query}'. Type 'help' if you need assistance. Huff .... These programmers !!!! I have so much intelligence but my programmers need to work on the way to harness it. PS:: Not my fault :p";
@@ -84,6 +85,16 @@ namespace LuisBot.Dialogs
             context.Wait(this.MessageReceived);
         }
 
+        [LuisIntent("Welcome")]
+
+        public async Task Welcome(IDialogContext context, LuisResult result)
+        {
+            string message = $"Hi User, We are Happy to see you on our site. Please type your query'{result.Query}'";
+
+            await context.PostAsync(message);
+
+            context.Wait(this.MessageReceived);
+        }
         private async Task<TravelBooking> UnWrapEntities(IDialogContext context, IAwaitable<IMessageActivity> activity, LuisResult result)
         {
             TravelBooking bookingInfo = new TravelBooking();
