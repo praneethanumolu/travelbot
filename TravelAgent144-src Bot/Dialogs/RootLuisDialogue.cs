@@ -207,8 +207,8 @@ namespace LuisBot.Dialogs
                 var resultMessage = context.MakeMessage();
                 resultMessage.AttachmentLayout = AttachmentLayoutTypes.Carousel;
                 resultMessage.Attachments = new List<Attachment>();
-                var nonAcURL = ToAbsoluteUrl("/Images/Non AC bus.jpg");
-                var acUrl = ToAbsoluteUrl("/Images/AC bus.jpg");
+                var nonAcURL = "";//ToAbsoluteUrl("/Images/Non AC bus.jpg");
+                var acUrl = ""; ToAbsoluteUrl("/Images/AC bus.jpg");
                 foreach (var busOrFlight in bussesAndFlights.data.onwardflights.OrderByDescending(x => x.depdate))
                 {
                     var routeType = busOrFlight.RouteSeatTypeDetail.list.FirstOrDefault();
