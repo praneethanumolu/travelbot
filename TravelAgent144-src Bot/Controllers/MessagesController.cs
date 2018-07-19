@@ -40,8 +40,8 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             }
             catch(Exception ex)
             {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError) { ReasonPhrase = ex.ToString() };
                 Log.Error("Error Occurred : " + ex.ToString());
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError) { ReasonPhrase = ex.ToString() };
             }
            
         }
