@@ -197,7 +197,9 @@ namespace LuisBot.Dialogs
             await context.PostAsync("Now I am going to make some quick calls to get the details... Hold on tight .... It may take a minute since we are using all cheap resources to accumulate the data .");
             Log.Info($"String Entered {travelInfo.DateOfTravel} date Detected : { travelInfo.ConvertedDateTime}");
             BusSearch busSearchHelper = new BusSearch();
-            var bussesAndFlights = busSearchHelper.SearchBusses(travelInfo.FromLocation, travelInfo.ToLocation, travelInfo.ConvertedDateTime.AddDays(1));
+            Log.Info("After Bus Search Init");
+            var bussesAndFlights = busSearchHelper.SearchBusses(travelInfo.FromLocation, travelInfo.ToLocation, travelInfo.ConvertedDateTime);
+            Log.Info("After Bus Search Method");
             if (bussesAndFlights.data == null || bussesAndFlights.data.onwardflights == null || bussesAndFlights.data.onwardflights.Count() == 0)
                 await context.PostAsync($"Sorry I cant find any {travelInfo.TravelType} from {travelInfo.FromLocation} to {travelInfo.ToLocation}");
             else
