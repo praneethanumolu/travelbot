@@ -20,7 +20,7 @@ namespace LuisBot.Dialogs
     [Serializable]
     public class RootLuisDialog : LuisDialog<object>
     {
-
+        List<string> welcome_messages = new List<string> { "Hi user, welcome to our new bot service. Please feel free to test", "Hello user, We hope you are having a good day. Please feel free to test our new bot", $"Hi User, We are Happy to see you on our site. Please type your query" };
         private const string ToLocation = "Location::ToLocation";
 
         private const string TravelBookingInfo = "Travel Book Info";
@@ -89,7 +89,9 @@ namespace LuisBot.Dialogs
 
         public async Task Welcome(IDialogContext context, LuisResult result)
         {
-            string message = $"Hi User, We are Happy to see you on our site. Please type your query'{result.Query}'";
+            Random rnd = new Random();
+            int messageSelected = rnd.Next(1, welcome_messages.Count + 1);
+            string message = welcome_messages[messageSelected];
 
             await context.PostAsync(message);
 
