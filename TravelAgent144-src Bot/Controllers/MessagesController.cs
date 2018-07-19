@@ -24,7 +24,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
         [ResponseType(typeof(void))]
         public virtual async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
-            Log.Info("Test Log");
+            
             try
             {
                 // check if activity is of type message

@@ -17,7 +17,7 @@ namespace Travel_Website.Repository
             string responseFormat = ConfigurationManager.AppSettings["GoibiboResponseFormat"] as string;
             string goibiboApiUri = ConfigurationManager.AppSettings["GoibiboApiUri"] as string;
             var searchHelper = new GoibiboBusSearchHelper(appId, appSecret, goibiboApiUri, responseFormat);
-            var details = searchHelper.GetBusDetails("Hyderabad", "Vijayawada", DateTime.Now.ToString("yyyyMMdd"));
+            var details = searchHelper.GetBusDetails("Hyderabad", "Vijayawada", date.ToString("yyyyMMdd"));
             return details;
         }
     }
