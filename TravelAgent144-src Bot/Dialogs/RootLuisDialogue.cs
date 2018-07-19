@@ -90,7 +90,7 @@ namespace LuisBot.Dialogs
         public async Task Welcome(IDialogContext context, LuisResult result)
         {
             Random rnd = new Random();
-            int messageSelected = rnd.Next(1, welcome_messages.Count + 1);
+            int messageSelected = rnd.Next(0, welcome_messages.Count);
             string message = welcome_messages[messageSelected];
 
             await context.PostAsync(message);
