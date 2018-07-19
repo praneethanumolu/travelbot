@@ -27,7 +27,7 @@ namespace LuisBot.Dialogs
 
         private const string FromLocation = "Location::FromLocation";
 
-        private const string DateOfTravel = "datetimeV2";
+        private const string DateOfTravel = "builtin.datetimeV2.date";
 
         private const string Class = "Class";
 
@@ -126,10 +126,12 @@ namespace LuisBot.Dialogs
             if (result.TryFindEntity(DateOfTravel, out travelEntityDate))
             {
                 //bookingInfo.DateOfTravel = travelEntityDate.Entity;
-
+                bookingInfo.DateOfTravel = travelEntityDate.Entity;
                 Parser parser = new Parser();
-                var dateResult = parser.Parse(travelEntityDate.Entity);
-
+                var parsedDate = parser.Parse(bookingInfo.DateOfTravel).Start;
+                bookingInfo.ConvertedDateTime = parsedDate.HasValue ? parser.Parse(travelEntityDate.Entity).Start.Value : DateTime.Today;
+                if (!parsedDate.HasValue)
+                    bookingInfo.DateOfTravel = string.Empty;
             }
 
             if (result.TryFindEntity(Class, out travelEntityClass))
