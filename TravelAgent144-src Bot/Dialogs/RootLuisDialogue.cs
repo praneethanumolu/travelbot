@@ -13,6 +13,7 @@ namespace LuisBot.Dialogs
     using SimpleEchoBot.Models;
     using Travel_Website.Repository;
     using Chronic;
+    using log4net;
 
     [LuisModel("16816e8d-34d5-4eb4-b2ae-c1c1590d98ba", "d8c7c7db62134d9db0359a9845fb6d8c")]
     //[LuisModel("4bd9e4fa-8d7d-4b52-b968-43a2dd995cdd", "ff0cc11d49a14688844b74873bb9a97c")]
@@ -32,6 +33,9 @@ namespace LuisBot.Dialogs
 
         public const string TravelType = "Travel Type";
 
+        private static readonly ILog Log =
+              LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         //private const string EntityGeographyCity = "builtin.geography.city";
 
         //private const string EntityHotelName = "Hotel";
@@ -40,7 +44,7 @@ namespace LuisBot.Dialogs
 
         //private IList<string> titleOptions = new List<string> { "“Very stylish, great stay, great staff”", "“good hotel awful meals”", "“Need more attention to little things”", "“Lovely small hotel ideally situated to explore the area.”", "“Positive surprise”", "“Beautiful suite and resort”" };
 
-      
+
 
         private async Task<TravelBooking> PromptUserForData(IDialogContext context, IAwaitable<IMessageActivity> activity, LuisResult result, TravelBooking bookingInfo)
         {
@@ -191,6 +195,7 @@ namespace LuisBot.Dialogs
                 travelInfo.ConvertedDateTime = DateTime.Now.Date;
             //await context.PostAsync($"Now {travelInfo.TravelType} will be searched");
             await context.PostAsync("Now I am going to make some quick calls to get the details... Hold on tight .... It may take a minute since we are using all cheap resources to accumulate the data .");
+            Log.Info($"String Entered {travelInfo.DateOfTravel} date Detected : { travelInfo.ConvertedDateTime}");
             BusSearch busSearchHelper = new BusSearch();
             var bussesAndFlights = busSearchHelper.SearchBusses(travelInfo.FromLocation, travelInfo.ToLocation, travelInfo.ConvertedDateTime.AddDays(1));
             if (bussesAndFlights.data == null || bussesAndFlights.data.onwardflights == null || bussesAndFlights.data.onwardflights.Count() == 0)
