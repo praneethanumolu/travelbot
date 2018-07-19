@@ -7,12 +7,15 @@ using System.Web.Http.Description;
 using System.Net.Http;
 using LuisBot.Dialogs;
 using System;
+using log4net;
 
 namespace Microsoft.Bot.Sample.SimpleEchoBot
 {
     [BotAuthentication]
     public class MessagesController : ApiController
     {
+        private static readonly ILog Log =
+              LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         /// <summary>
         /// POST: api/Messages
         /// receive a message from a user and send replies
@@ -21,6 +24,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
         [ResponseType(typeof(void))]
         public virtual async Task<HttpResponseMessage> Post([FromBody] Activity activity)
         {
+            Log.Info("Test Log");
             try
             {
                 // check if activity is of type message
@@ -37,6 +41,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             catch(Exception ex)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError) { ReasonPhrase = ex.ToString() };
+                Log.Error("Error Occurred : " + ex.ToString());
             }
            
         }
