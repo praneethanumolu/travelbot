@@ -202,12 +202,15 @@
     <Compile Include="Common\WebApiClient.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Data Models\BusSearch.cs" />
+    <Compile Include="Data Models\WeatherApiForecastModel.cs" />
     <Compile Include="Dialogs\EchoDialog.cs" />
     <Compile Include="Dialogs\RootLuisDialogue.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\GoibiboHelper.cs" />
+    <Compile Include="Helpers\PrettyDateHelper.cs" />
+    <Compile Include="Helpers\WeatherHelper.cs" />
     <Compile Include="Models\TravelBooking.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BusSearch.cs" />

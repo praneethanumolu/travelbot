@@ -14,6 +14,7 @@ namespace LuisBot.Dialogs
     using Travel_Website.Repository;
     using Chronic;
     using log4net;
+    using SimpleEchoBot.Helpers;
 
     [LuisModel("16816e8d-34d5-4eb4-b2ae-c1c1590d98ba", "d8c7c7db62134d9db0359a9845fb6d8c")]
     //[LuisModel("4bd9e4fa-8d7d-4b52-b968-43a2dd995cdd", "ff0cc11d49a14688844b74873bb9a97c")]
@@ -33,6 +34,8 @@ namespace LuisBot.Dialogs
 
         public const string TravelType = "Travel Type";
 
+        public const string WeatherCity = "city";
+
         private static readonly ILog Log =
               LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -51,7 +54,7 @@ namespace LuisBot.Dialogs
             var travelFormDialog = new FormDialog<TravelBooking>(bookingInfo, this.BuildTravelsForm, FormOptions.PromptInStart, result.Entities);
             //if (!IsDataValid(bookingInfo))
             //    context.Post()
-                context.Call(travelFormDialog, this.ResumeAfterTravelFormDialog);
+            context.Call(travelFormDialog, this.ResumeAfterTravelFormDialog);
             return bookingInfo;
         }
 
@@ -140,7 +143,7 @@ namespace LuisBot.Dialogs
             }
 
             //while(!IsDataValid(bookingInfo))
-                await PromptUserForData(context, activity, result, bookingInfo);
+            await PromptUserForData(context, activity, result, bookingInfo);
             //var hotelsQuery = new HotelsQuery();
 
             //EntityRecommendation cityEntityRecommendation;
@@ -173,6 +176,78 @@ namespace LuisBot.Dialogs
             var entityResult = UnWrapEntities(context, activity, result).Result;
         }
 
+        [LuisIntent("Weather.GetCondition")]
+        [LuisIntent("Weather.GetForecast")]
+        //[LuisIntent("")]
+        public async Task WeatherCondition(IDialogContext context, IAwaitable<IMessageActivity> activity, LuisResult result)
+        {
+            var message = await activity;
+            await context.PostAsync($"Welcome to the weather Predictor! We are analyzing your message: '{message.Text}'...");
+            //var entityResult = UnWrapEntities(context, activity, result).Result;
+            EntityRecommendation weatherCityEntity;
+            EntityRecommendation weatherDateEntity;
+
+            string city = string.Empty;
+
+            SimpleEchoBot.Helpers.WeatherHelper helper = new SimpleEchoBot.Helpers.WeatherHelper();
+
+            if (result.TryFindEntity(WeatherCity, out weatherCityEntity))
+            {
+                city = weatherCityEntity.Entity;
+                //bookingInfo.TravelType = travelEntityTravelType.Entity;
+            }
+
+            city = string.IsNullOrEmpty(city) ? "Hyderabad" : city;
+
+            var weatherForecast = helper.GetForecastWeatherData(city);
+
+            if (result.TryFindEntity(FromLocation, out weatherDateEntity))
+            {
+                //bookingInfo.FromLocation = travelEntityFromLocation.Entity;
+            }
+            await context.PostAsync($"Please wait while I make some quick calls to authorities ");
+            var resultMessage = context.MakeMessage();
+            resultMessage.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+            resultMessage.Attachments = new List<Attachment>();
+            List<DateTime> datesAdded = new List<DateTime>();
+            foreach (var weatherDay in weatherForecast.list)
+            {
+                var currentDateTime = Convert.ToDateTime(weatherDay.dt_txt);
+                if (!datesAdded.Contains(currentDateTime) && DateTime.Now > currentDateTime && datesAdded.Count <= 4)
+                {
+                    var weatherDetails = weatherDay.weather.First();
+                    HeroCard heroCard = new HeroCard()
+                    {
+                        Title = weatherDetails.main + " " + PrettyDateHelper.GetPrettyDate(currentDateTime),
+                        Subtitle = $"{weatherDetails.description}",
+                        Text = $"On {weatherDay.dt_txt} at {city} Max Temperature - {weatherDay.main.temp_max} Min Temperature - {weatherDay.main.temp_min} Mostly {weatherDetails.main}",
+                        //Images = new List<CardImage>()
+                        //{
+                        //    new CardImage() { Url = routeType == null ? nonAcURL : (routeType.busCondition.Contains("nonac") ? nonAcURL : acUrl) }
+                        //},
+                        //Buttons = new List<CardAction>()
+                        //    {
+                        //        new CardAction()
+                        //        {
+                        //            Title = "Book Now",
+                        //            Type = ActionTypes.OpenUrl,
+                        //            Value = $"https://www.google.com"
+                        //        }
+                        //    }
+                    };
+                    resultMessage.Attachments.Add(heroCard.ToAttachment());
+                }
+                datesAdded.Add(currentDateTime);
+                //await context.PostAsync(response);
+            }
+            await context.PostAsync(resultMessage);
+        }
+
+        public string KelvinToCentigrade(float kelvin)
+        {
+            return kelvin - 272.15 + "C";
+        }
+
         public static string ToAbsoluteUrl(string relativeUrl)
         {
             try
@@ -194,7 +269,7 @@ namespace LuisBot.Dialogs
                 return String.Format("{0}://{1}{2}{3}",
                     url.Scheme, url.Host, port, VirtualPathUtility.ToAbsolute(relativeUrl));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return relativeUrl;
             }
@@ -219,23 +294,36 @@ namespace LuisBot.Dialogs
                 await context.PostAsync($"Sorry I cant find any {travelInfo.TravelType} from {travelInfo.FromLocation} to {travelInfo.ToLocation}");
             else
             {
+                var busResultAfterSortingLogic = bussesAndFlights.data.onwardflights.AsEnumerable();
+                if (!string.IsNullOrEmpty(travelInfo.Class))
+                {
+                    if (travelInfo.Class.ToLower().Contains("fast"))
+                    {
+                        busResultAfterSortingLogic = bussesAndFlights.data.onwardflights.OrderBy(x => x.arrdate - x.depdate);
+                    }
+                    else if (travelInfo.Class.ToLower().Contains("cheap"))
+                    {
+                        busResultAfterSortingLogic = bussesAndFlights.data.onwardflights.OrderBy(x => x.fare.totalfare);
+                    }
+                }
+
                 var resultMessage = context.MakeMessage();
                 resultMessage.AttachmentLayout = AttachmentLayoutTypes.Carousel;
                 resultMessage.Attachments = new List<Attachment>();
-                var nonAcURL = "";//ToAbsoluteUrl("/Images/Non AC bus.jpg");
-                var acUrl = ""; ToAbsoluteUrl("/Images/AC bus.jpg");
-                foreach (var busOrFlight in bussesAndFlights.data.onwardflights.OrderByDescending(x => x.depdate))
+                //var nonAcURL = "";//ToAbsoluteUrl("/Images/Non AC bus.jpg");
+                //var acUrl = ""; ToAbsoluteUrl("/Images/AC bus.jpg");
+                foreach (var busOrFlight in busResultAfterSortingLogic.Take(5))
                 {
                     var routeType = busOrFlight.RouteSeatTypeDetail.list.FirstOrDefault();
                     HeroCard heroCard = new HeroCard()
                     {
                         Title = busOrFlight.TravelsName,
-                        Subtitle = $"{busOrFlight.BusType} starts at {busOrFlight.DepartureTime} to {busOrFlight.destination}  @{busOrFlight.fare.totalfare}",
-                        Text = $"Departs on {busOrFlight.depdate} at {busOrFlight.DepartureTime} Origin - {busOrFlight.origin} service number - {busOrFlight.BusServiceID} reaches {busOrFlight.destination} at {busOrFlight.arrdate} ",
-                        Images = new List<CardImage>()
-                        {
-                            new CardImage() { Url = routeType == null ? nonAcURL : (routeType.busCondition.Contains("nonac") ? nonAcURL : acUrl) }
-                        },
+                        Subtitle = $"{busOrFlight.BusType} starts at {busOrFlight.DepartureTime} to {busOrFlight.destination}  @Rs . {busOrFlight.fare.totalfare} ",
+                        Text = $"Departs on {busOrFlight.depdate} at {busOrFlight.DepartureTime} Origin - {busOrFlight.origin} service number - {busOrFlight.BusServiceID} reaches {busOrFlight.destination} at {busOrFlight.arrdate} @Rs . {busOrFlight.fare.totalfare}",
+                        //Images = new List<CardImage>()
+                        //{
+                        //    new CardImage() { Url = routeType == null ? nonAcURL : (routeType.busCondition.Contains("nonac") ? nonAcURL : acUrl) }
+                        //},
                         Buttons = new List<CardAction>()
                         {
                             new CardAction()
@@ -317,7 +405,7 @@ namespace LuisBot.Dialogs
         [LuisIntent("OnDevice.Help")]
         public async Task Help(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("Hi I am currently learning on how to become a travel assistant ..... I am still very young and trying my best ... I am here to help! Try asking me things like 'Busses from Hyderabad to Banglore', 'Flights to delhi' or 'weather in Bombay'");
+            await context.PostAsync("Hi I am currently learning on how to become a travel assistant ..... I am still very young and trying my best ... I am here to help! Try asking me things like 'Busses from Hyderabad to Banglore',  'weather in Bombay'");
 
             context.Wait(this.MessageReceived);
         }

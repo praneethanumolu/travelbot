@@ -1,12 +1,15 @@
-﻿2018-07-19 23:46:48,440 INFO [25] Microsoft.Bot.Sample.SimpleEchoBot.MessagesController+<Post>d__1.MoveNext - Test Log
-2018-07-20 00:09:33,605 INFO [67] Microsoft.Bot.Sample.SimpleEchoBot.MessagesController+<Post>d__1.MoveNext - Test Log
-2018-07-20 00:09:33,606 INFO [69] Microsoft.Bot.Sample.SimpleEchoBot.MessagesController+<Post>d__1.MoveNext - Test Log
-2018-07-20 00:09:33,605 INFO [54] Microsoft.Bot.Sample.SimpleEchoBot.MessagesController+<Post>d__1.MoveNext - Test Log
-2018-07-20 00:09:40,460 INFO [70] Microsoft.Bot.Sample.SimpleEchoBot.MessagesController+<Post>d__1.MoveNext - Test Log
-2018-07-20 00:09:47,769 INFO [69] Microsoft.Bot.Sample.SimpleEchoBot.MessagesController+<Post>d__1.MoveNext - Test Log
-2018-07-20 01:32:13,590 ERROR [14] Microsoft.Bot.Sample.SimpleEchoBot.MessagesController+<Post>d__1.MoveNext - Error Occurred : System.NullReferenceException: Object reference not set to an instance of an object.
-   at LuisBot.Dialogs.RootLuisDialog.ParseChronicDate(String dateTime) in F:\Glim\Emperical\Travel\code\travelbot\TravelAgent144-src Bot\Dialogs\RootLuisDialogue.cs:line 73
-   at LuisBot.Dialogs.RootLuisDialog.<ResumeAfterTravelFormDialog>d__17.MoveNext() in F:\Glim\Emperical\Travel\code\travelbot\TravelAgent144-src Bot\Dialogs\RootLuisDialogue.cs:line 205
+﻿2018-08-02 09:29:07,549 INFO [19] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered tomorrow date Detected : 8/3/2018 12:00:00 AM
+2018-08-02 09:29:07,586 INFO [19] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 09:29:17,391 INFO [19] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method
+2018-08-02 09:32:37,498 INFO [6] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered next week date Detected : 8/5/2018 12:00:00 AM
+2018-08-02 09:32:37,518 INFO [6] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 09:32:39,754 INFO [6] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method
+2018-08-02 09:33:03,711 INFO [20] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered next week date Detected : 8/5/2018 12:00:00 AM
+2018-08-02 09:33:03,711 INFO [20] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 09:33:05,543 INFO [20] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method
+2018-08-02 09:34:36,503 ERROR [6] Microsoft.Bot.Sample.SimpleEchoBot.MessagesController+<Post>d__1.MoveNext - Error Occurred : System.NullReferenceException: Object reference not set to an instance of an object.
+   at LuisBot.Dialogs.RootLuisDialog.ParseChronicDate(String dateTime) in C:\Users\abhi\Documents\GitHub\NewTravelBot\TravelAgent144-src Bot\Dialogs\RootLuisDialogue.cs:line 76
+   at LuisBot.Dialogs.RootLuisDialog.<ResumeAfterTravelFormDialog>d__20.MoveNext() in C:\Users\abhi\Documents\GitHub\NewTravelBot\TravelAgent144-src Bot\Dialogs\RootLuisDialogue.cs:line 282
 --- End of stack trace from previous location where exception was thrown ---
    at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
@@ -103,7 +106,37 @@
    at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
-   at Microsoft.Bot.Sample.SimpleEchoBot.MessagesController.<Post>d__1.MoveNext() in F:\Glim\Emperical\Travel\code\travelbot\TravelAgent144-src Bot\Controllers\MessagesController.cs:line 33
-2018-07-20 01:39:22,997 INFO [14] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__17.MoveNext - String Entered tomorrow date Detected : 7/21/2018 12:00:00 AM
-2018-07-20 01:39:23,330 INFO [14] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__17.MoveNext - After Bus Search Init
-2018-07-20 01:39:29,103 INFO [14] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__17.MoveNext - After Bus Search Method
+   at Microsoft.Bot.Sample.SimpleEchoBot.MessagesController.<Post>d__1.MoveNext() in C:\Users\abhi\Documents\GitHub\NewTravelBot\TravelAgent144-src Bot\Controllers\MessagesController.cs:line 34
+2018-08-02 09:35:25,802 INFO [9] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered next week date Detected : 8/5/2018 12:00:00 AM
+2018-08-02 09:35:25,803 INFO [9] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 09:35:26,578 INFO [9] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method
+2018-08-02 09:36:17,154 INFO [56] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered tomorrow date Detected : 8/3/2018 12:00:00 AM
+2018-08-02 09:36:17,154 INFO [56] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 09:36:24,417 INFO [56] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method
+2018-08-02 10:20:04,779 INFO [130] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered tomorrow date Detected : 8/3/2018 12:00:00 AM
+2018-08-02 10:20:04,801 INFO [130] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 10:20:05,556 INFO [130] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method
+2018-08-02 10:20:28,824 INFO [164] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered next week date Detected : 8/5/2018 12:00:00 AM
+2018-08-02 10:20:28,825 INFO [164] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 10:20:41,436 INFO [164] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method
+2018-08-02 10:49:23,644 INFO [64] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered tomorrow date Detected : 8/3/2018 12:00:00 AM
+2018-08-02 10:49:23,666 INFO [64] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 10:49:24,386 INFO [64] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method
+2018-08-02 10:49:44,189 INFO [64] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered next week date Detected : 8/5/2018 12:00:00 AM
+2018-08-02 10:49:44,189 INFO [64] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 10:49:44,898 INFO [64] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method
+2018-08-02 10:50:23,650 INFO [72] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered tomorrow date Detected : 8/3/2018 12:00:00 AM
+2018-08-02 10:50:23,651 INFO [72] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 10:50:25,308 INFO [72] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method
+2018-08-02 10:51:39,295 INFO [64] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered tomorrow date Detected : 8/3/2018 12:00:00 AM
+2018-08-02 10:51:39,296 INFO [64] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 10:51:40,840 INFO [64] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method
+2018-08-02 10:52:33,320 INFO [9] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered tomorrow date Detected : 8/3/2018 12:00:00 AM
+2018-08-02 10:52:33,343 INFO [9] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 10:52:34,175 INFO [9] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method
+2018-08-02 10:54:42,097 INFO [16] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered tomorrow date Detected : 8/3/2018 12:00:00 AM
+2018-08-02 10:54:42,121 INFO [16] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 10:54:42,902 INFO [16] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method
+2018-08-02 10:55:02,012 INFO [18] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - String Entered tomorrow date Detected : 8/3/2018 12:00:00 AM
+2018-08-02 10:55:02,013 INFO [18] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Init
+2018-08-02 10:55:03,341 INFO [18] LuisBot.Dialogs.RootLuisDialog+<ResumeAfterTravelFormDialog>d__20.MoveNext - After Bus Search Method

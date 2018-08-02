@@ -27,6 +27,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             
             try
             {
+                
                 // check if activity is of type message
                 if (activity != null && activity.GetActivityType() == ActivityTypes.Message)
                 {
