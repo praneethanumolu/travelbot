@@ -22,8 +22,6 @@ namespace LuisBot.Dialogs
     public class RootLuisDialog : LuisDialog<object>
     {
         List<string> welcome_messages = new List<string> { "Hi user, welcome to our new bot service. Please feel free to test", "Hello user, We hope you are having a good day. Please feel free to test our new bot", $"Hi User, We are Happy to see you on our site. Please type your query" };
-
-        
         private const string ToLocation = "Location::ToLocation";
 
         private const string TravelBookingInfo = "Travel Book Info";
@@ -102,10 +100,6 @@ namespace LuisBot.Dialogs
 
             context.Wait(this.MessageReceived);
         }
-
-       
-        
-
         private async Task<TravelBooking> UnWrapEntities(IDialogContext context, IAwaitable<IMessageActivity> activity, LuisResult result)
         {
             TravelBooking bookingInfo = new TravelBooking();
@@ -334,7 +328,7 @@ namespace LuisBot.Dialogs
                         {
                             new CardAction()
                             {
-                                Title = "Book Now",
+                                Title = $"Rs . {busOrFlight.fare.totalfare}",
                                 Type = ActionTypes.OpenUrl,
                                 Value = $"https://www.google.com"
                             }
