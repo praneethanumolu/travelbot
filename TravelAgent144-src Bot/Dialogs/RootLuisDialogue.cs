@@ -184,8 +184,8 @@ namespace LuisBot.Dialogs
         public async Task Age(IDialogContext context, LuisResult result)
         {
             Random rnd = new Random();
-            int messageSelected = rnd.Next(0, name_messages.Count);
-            string message = name_messages[messageSelected];
+            int messageSelected = rnd.Next(0, age_messages.Count);
+            string message = age_messages[messageSelected];
 
             await context.PostAsync(message);
 
