@@ -22,6 +22,19 @@ namespace LuisBot.Dialogs
     public class RootLuisDialog : LuisDialog<object>
     {
         List<string> welcome_messages = new List<string> { "Hi user, welcome to our new bot service. Please feel free to test", "Hello user, We hope you are having a good day. Please feel free to test our new bot", $"Hi User, We are Happy to see you on our site. Please type your query" };
+
+        List<string> bye_messages = new List<string> { "Thanks for using the bot, Hope you enjoyed", "Thanks! Hope you recommend it to your friends" };
+
+        List<string> angry_messages = new List<string> { "We regret for the inconvinience, we will try to train our bot to serve your purpose properly", "Appologies! Please try again after some time. We try to improve our bot" };
+
+        List<string> parent_messages = new List<string> { "I dont have a parent. But praneeth has created me" };
+
+        List<string> how_messages = new List<string> { "I am doing good, hope you are doing god as well" };
+
+        List<string> name_messages = new List<string> { "My name is MaDiPa" };
+
+        List<string> age_messages = new List<string> { "I dont have age. But praneeth created me on 3rd Aug as Manoj warned me to complete by then" };
+
         private const string ToLocation = "Location::ToLocation";
 
         private const string TravelBookingInfo = "Travel Book Info";
@@ -100,6 +113,9 @@ namespace LuisBot.Dialogs
 
             context.Wait(this.MessageReceived);
         }
+
+
+
         private async Task<TravelBooking> UnWrapEntities(IDialogContext context, IAwaitable<IMessageActivity> activity, LuisResult result)
         {
             TravelBooking bookingInfo = new TravelBooking();
