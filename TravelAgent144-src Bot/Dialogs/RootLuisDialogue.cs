@@ -22,19 +22,6 @@ namespace LuisBot.Dialogs
     public class RootLuisDialog : LuisDialog<object>
     {
         List<string> welcome_messages = new List<string> { "Hi user, welcome to our new bot service. Please feel free to test", "Hello user, We hope you are having a good day. Please feel free to test our new bot", $"Hi User, We are Happy to see you on our site. Please type your query" };
-
-        List<string> bye_messages = new List<string> { "Thanks for using the bot, Hope you enjoyed", "Thanks! Hope you recommend it to your friends" };
-
-        List<string> angry_messages = new List<string> { "We regret for the inconvinience, we will try to train our bot to serve your purpose properly", "Appologies! Please try again after some time. We try to improve our bot" };
-
-        List<string> parent_messages = new List<string> { "I dont have a parent. But praneeth has created me" };
-
-        List<string> how_messages = new List<string> { "I am doing good, hope you are doing god as well" };
-
-        List<string> name_messages = new List<string> { "My name is MaDiPa" };
-
-        List<string> age_messages = new List<string> { "I dont have age. But praneeth created me on 3rd Aug as Manoj warned me to complete by then" };
-
         private const string ToLocation = "Location::ToLocation";
 
         private const string TravelBookingInfo = "Travel Book Info";
@@ -113,86 +100,6 @@ namespace LuisBot.Dialogs
 
             context.Wait(this.MessageReceived);
         }
-
-        [LuisIntent("Angry")]
-
-        public async Task Angry(IDialogContext context, LuisResult result)
-        {
-            Random rnd = new Random();
-            int messageSelected = rnd.Next(0, angry_messages.Count);
-            string message = angry_messages[messageSelected];
-
-            await context.PostAsync(message);
-
-            context.Wait(this.MessageReceived);
-        }
-
-        [LuisIntent("Bye")]
-
-        public async Task Bye(IDialogContext context, LuisResult result)
-        {
-            Random rnd = new Random();
-            int messageSelected = rnd.Next(0, bye_messages.Count);
-            string message = bye_messages[messageSelected];
-
-            await context.PostAsync(message);
-
-            context.Wait(this.MessageReceived);
-        }
-
-        [LuisIntent("Parent")]
-
-        public async Task Parent(IDialogContext context, LuisResult result)
-        {
-            Random rnd = new Random();
-            int messageSelected = rnd.Next(0, parent_messages.Count);
-            string message = parent_messages[messageSelected];
-
-            await context.PostAsync(message);
-
-            context.Wait(this.MessageReceived);
-        }
-
-        [LuisIntent("How")]
-
-        public async Task How(IDialogContext context, LuisResult result)
-        {
-            Random rnd = new Random();
-            int messageSelected = rnd.Next(0, how_messages.Count);
-            string message = how_messages[messageSelected];
-
-            await context.PostAsync(message);
-
-            context.Wait(this.MessageReceived);
-        }
-
-        [LuisIntent("Name")]
-
-        public async Task Name(IDialogContext context, LuisResult result)
-        {
-            Random rnd = new Random();
-            int messageSelected = rnd.Next(0, name_messages.Count);
-            string message = name_messages[messageSelected];
-
-            await context.PostAsync(message);
-
-            context.Wait(this.MessageReceived);
-        }
-
-        [LuisIntent("Age")]
-
-        public async Task Age(IDialogContext context, LuisResult result)
-        {
-            Random rnd = new Random();
-            int messageSelected = rnd.Next(0, age_messages.Count);
-            string message = age_messages[messageSelected];
-
-            await context.PostAsync(message);
-
-            context.Wait(this.MessageReceived);
-        }
-
-
         private async Task<TravelBooking> UnWrapEntities(IDialogContext context, IAwaitable<IMessageActivity> activity, LuisResult result)
         {
             TravelBooking bookingInfo = new TravelBooking();
