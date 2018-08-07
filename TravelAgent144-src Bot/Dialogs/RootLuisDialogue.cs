@@ -179,7 +179,7 @@ namespace LuisBot.Dialogs
             context.Wait(this.MessageReceived);
         }
 
-        [LuisIntent("age")]
+        [LuisIntent("Age")]
 
         public async Task age(IDialogContext context, LuisResult result)
         {
