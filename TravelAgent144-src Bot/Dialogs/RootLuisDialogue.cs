@@ -23,17 +23,17 @@ namespace LuisBot.Dialogs
     {
         List<string> welcome_messages = new List<string> { "Hi user, welcome to our new bot service. Please feel free to test", "Hello user, We hope you are having a good day. Please feel free to test our new bot", $"Hi User, We are Happy to see you on our site. Please type your query" };
 
-        List<string> bye_messages = new List<string> { "Thanks for using the bot, Hope you enjoyed", "Thanks! Hope you recommend it to your friends" };
+        List<string> bye_messages = new List<string> { "Thanks for the chat! See you again!!", "Thanks for visiting me! Have a Great Day!!", "Thank you for being here. Please do come back. Will wait for you!!" };
 
-        List<string> angry_messages = new List<string> { "We regret for the inconvinience, we will try to train our bot to serve your purpose properly", "Appologies! Please try again after some time. We try to improve our bot" };
+        List<string> angry_messages = new List<string> { "I regret for the inconvenience! I will try to learn better to serve your purpose efficiently", "Apologies, unable to retrieve the requested information now! Please try again after some time.", "My bad! Looks like some network is broken. I'm unable to get the information now." };
 
-        List<string> parent_messages = new List<string> { "I dont have a parent. But praneeth has created me" };
+        List<string> parent_messages = new List<string> { "Technically, Praneeth has developed me. Hence he is my father." };
 
-        List<string> how_messages = new List<string> { "I am doing good, hope you are doing god as well" };
+        List<string> how_messages = new List<string> { "I am doing awesome. You look great yourself.", "As awesome as you!" };
 
-        List<string> name_messages = new List<string> { "My name is MaDiPa" };
+        List<string> name_messages = new List<string> { "My name is Chitti, The BOT", "I am Chitti, The BOT." };
 
-        List<string> age_messages = new List<string> { "I dont have age. But praneeth created me on 3rd Aug as Manoj warned me to complete by then" };
+        List<string> age_messages = new List<string> { "I don't know how to carbon date Internet" };
 
         private const string ToLocation = "Location::ToLocation";
 
@@ -113,6 +113,87 @@ namespace LuisBot.Dialogs
 
             context.Wait(this.MessageReceived);
         }
+
+        [LuisIntent("Bye")]
+
+        public async Task bye(IDialogContext context, LuisResult result)
+        {
+            Random rnd = new Random();
+            int messageSelected = rnd.Next(0, bye_messages.Count);
+            string message = bye_messages[messageSelected];
+
+            await context.PostAsync(message);
+
+            context.Wait(this.MessageReceived);
+        }
+
+        [LuisIntent("Angry")]
+
+        public async Task angry(IDialogContext context, LuisResult result)
+        {
+            Random rnd = new Random();
+            int messageSelected = rnd.Next(0, angry_messages.Count);
+            string message = angry_messages[messageSelected];
+
+            await context.PostAsync(message);
+
+            context.Wait(this.MessageReceived);
+        }
+
+        [LuisIntent("Parent")]
+
+        public async Task parent(IDialogContext context, LuisResult result)
+        {
+            Random rnd = new Random();
+            int messageSelected = rnd.Next(0, parent_messages.Count);
+            string message = parent_messages[messageSelected];
+
+            await context.PostAsync(message);
+
+            context.Wait(this.MessageReceived);
+        }
+
+        [LuisIntent("How")]
+
+        public async Task how(IDialogContext context, LuisResult result)
+        {
+            Random rnd = new Random();
+            int messageSelected = rnd.Next(0, how_messages.Count);
+            string message = how_messages[messageSelected];
+
+            await context.PostAsync(message);
+
+            context.Wait(this.MessageReceived);
+        }
+
+        [LuisIntent("Name")]
+
+        public async Task name(IDialogContext context, LuisResult result)
+        {
+            Random rnd = new Random();
+            int messageSelected = rnd.Next(0, name_messages.Count);
+            string message = name_messages[messageSelected];
+
+            await context.PostAsync(message);
+
+            context.Wait(this.MessageReceived);
+        }
+
+        [LuisIntent("age")]
+
+        public async Task age(IDialogContext context, LuisResult result)
+        {
+            Random rnd = new Random();
+            int messageSelected = rnd.Next(0, age_messages.Count);
+            string message = age_messages[messageSelected];
+
+            await context.PostAsync(message);
+
+            context.Wait(this.MessageReceived);
+        }
+
+
+
 
 
 
